@@ -3,13 +3,158 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
     <title>BC Extension</title>
-    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        font-family: "Figtree", sans-serif;
+        width: 300px;
+        padding: 15px;
+        background-color: #f0f2f5;
+        color: #333;
+        border: 1px solid #ddd;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+      }
+
+      .header img {
+        width: 32px;
+        height: 32px;
+        margin-right: 10px;
+      }
+
+      h1 {
+        font-size: 18px;
+        margin: 0;
+        color: #128c7e;
+      }
+
+      .status-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding: 10px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .status-text {
+        font-weight: 500;
+      }
+
+      .status-indicator {
+        display: flex;
+        align-items: center;
+      }
+
+      .status-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 5px;
+      }
+
+      .active {
+        background-color: #25d366;
+      }
+
+      .inactive {
+        background-color: #d32f2f;
+      }
+
+      #toggle {
+        width: 100%;
+        padding: 10px;
+        background-color: #128c7e;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      #toggle:hover {
+        background-color: #075e54;
+      }
+
+      #toggle:active {
+        transform: scale(0.98);
+      }
+
+      .feature-list {
+        margin-top: 15px;
+        background-color: white;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature-list h2 {
+        font-size: 14px;
+        margin-top: 0;
+        color: #128c7e;
+      }
+
+      .feature-list ul {
+        padding-left: 20px;
+        margin-bottom: 0;
+      }
+
+      .feature-list li {
+        margin-bottom: 5px;
+        font-size: 13px;
+      }
+
+      .footer {
+        margin-top: 15px;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+        color: #999;
+      }
+    </style>
   </head>
   <body>
-    <div>
-      <h2>Tema:</h2>
-      <div id="switch-popup"></div>
+    <div class="header">
+      <img src="icons/icon-48.png" alt="WhatsApp Monitor" />
+      <h1>BC Extension</h1>
+    </div>
+
+    <div class="status-container">
+      <div class="status-text">Status:</div>
+      <div class="status-indicator">
+        <div id="status-dot" class="status-dot inactive"></div>
+        <span id="status">Desativado</span>
+      </div>
+    </div>
+
+    <button id="toggle">Ativar</button>
+
+    <div class="feature-list">
+      <h2>Recursos disponíveis:</h2>
+      <ul>
+        <li>Barra de navegação personalizada no WhatsApp Web</li>
+        <li>Acesso rápido a mensagens não lidas</li>
+        <li>Programação de mensagens para envio posterior</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      <p>&copy; BC Extension - v1.0</p>
     </div>
 
     <script src="popup.js"></script>
