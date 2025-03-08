@@ -26,11 +26,59 @@ function createNavBar() {
 function handleUnreadMessages() {
   console.log("Verificando mensagens não lidas...");
   // Implementação futura: Destacar conversas não lidas
+  showUnreadModal();
 }
 
 function handleScheduleMessage() {
   console.log("Programar mensagem...");
   showScheduleModal();
+}
+
+// Criar e mostrar o modal de mensagens não lidas
+function showUnreadModal() {
+  // Remover modal existente, se houver
+  const existingModal = document.getElementById("wam-unread-modal");
+  if (existingModal) {
+    existingModal.remove();
+  }
+
+  // Criar o modal
+  const modal = document.createElement("div");
+  modal.id = "wam-unread-modal";
+  modal.className = "wam-modal";
+
+  // Conteúdo do modal
+  modal.innerHTML = `
+    <div class="wam-modal-content">
+      <div class="wam-modal-header">
+        <h2>Mensagens não lidas</h2>
+        <span class="wam-modal-close">&times;</span>
+      </div>
+      <div class="wam-modal-body">
+        <!-- Conteúdo em branco conforme solicitado -->
+      </div>
+    </div>
+  `;
+
+  // Adicionar modal ao body
+  document.body.appendChild(modal);
+
+  // Adicionar event listeners
+  document
+    .querySelector("#wam-unread-modal .wam-modal-close")
+    .addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+  // Fechar modal ao clicar fora dele
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  // Mostrar o modal
+  modal.style.display = "block";
 }
 
 // Criar e mostrar o modal de programação de mensagens
@@ -87,7 +135,9 @@ function showScheduleModal() {
     modal.style.display = "none";
   });
 
-  document.getElementById("wam-schedule-btn").addEventListener("click", scheduleMessage);
+  document
+    .getElementById("wam-schedule-btn")
+    .addEventListener("click", scheduleMessage);
 
   // Fechar modal ao clicar fora dele
   window.addEventListener("click", (event) => {
@@ -117,15 +167,15 @@ function scheduleMessage() {
     contact,
     message,
     scheduledTime: `${date}T${time}`,
-    created: new Date().toISOString()
+    created: new Date().toISOString(),
   };
 
   // Salvar no storage do Chrome
-  chrome.storage.local.get(["scheduledMessages"], function(result) {
+  chrome.storage.local.get(["scheduledMessages"], function (result) {
     const messages = result.scheduledMessages || [];
     messages.push(scheduledMessage);
-    
-    chrome.storage.local.set({ scheduledMessages: messages }, function() {
+
+    chrome.storage.local.set({ scheduledMessages: messages }, function () {
       console.log("Mensagem agendada com sucesso!");
       document.getElementById("wam-schedule-modal").style.display = "none";
     });
@@ -252,8 +302,9 @@ function addStyles() {
     }
     
     .wam-form-row .wam-form-group {
-      width: 50%;
+      width: 80%;
     }
+
     .wam-form-group label {
       display: block;
       margin-bottom: 5px;
@@ -291,7 +342,7 @@ function addStyles() {
       background-color: #0f6e63;
     }
   `;
-  
+
   document.head.appendChild(style);
 }
 
